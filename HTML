@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Mood Organizer</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Honk&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="welcome-screen" v-if="!userEntered">
+  <!--Snow elements -->
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <div class="snow"></div>
+  <h1>music journal ^_^</h1>
+  <div class="name-input-container">
+    <input 
+      type="text" 
+      v-model="userName" 
+      placeholder="Enter your name"
+      @keyup.enter="enterJournal"
+    >
+    <button @click="enterJournal">Enter</button>
+  </div>
+</div>
+    
+
+    <div class="disco-lights">
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+      <div class="light"></div>
+    </div>
+<!-- Song form -->
+<div class="form-container">
+  <h1>
+    <span class="user-name"></span>'s Music Journal
+  </h1>
+  <form @submit.prevent="addSong">
+    <input type="text" v-model="newSong.name" placeholder="song name" required>
+    <input type="text" v-model="newSong.artist" placeholder="artist" required>
+    <input type="text" v-model="newSong.mood" placeholder="how does the song make you feel?" required>
+    <input type="text" v-model="newSong.event" placeholder="event/memory associated?">
+    <button type="submit">{{ submitButtonText }}</button>
+  </form>
+</div>
+
+<!-- Journal entry -->
+<div class="journal-entries" v-if="journalEntries.length > 0">
+  <div
+    v-for="(entry, index) in journalEntries"
+    :key="index"
+    class="journal-frame"
+  >
+    <h4>{{ entry.name }}</h4>
+    <p><strong>Artist:</strong> {{ entry.artist }}</p>
+    <p><strong>Mood:</strong> {{ entry.mood }}</p>
+    <p><strong>Event:</strong> {{ entry.event || 'No event tagged' }}</p>
+    <!-- YouTube Player -->
+    <div v-if="entry.videoId" class="youtube-player">
+      <iframe
+        :src="`https://www.youtube.com/embed/${entry.videoId}`"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <!-- Edit and delete functionality -->
+    <div class="entry-actions">
+      <button @click="editEntry(index)">Edit</button>
+      <button @click="deleteEntry(index)">Delete</button>
+    </div>
+  </div>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
