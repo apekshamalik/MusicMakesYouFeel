@@ -1,0 +1,373 @@
+/* General Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fbd3e9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Welcome Screen Styling */
+.welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffe6ea;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease-out;
+  overflow: hidden;
+}
+
+.journal-title.honk-font {
+  font-family: 'Honk', cursive, sans-serif;
+}
+
+.welcome-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.welcome-screen h1 {
+  color: white;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.name-input-container {
+  display: flex;
+  gap: 10px;
+}
+
+.name-input-container input {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  width: 250px;
+}
+
+.name-input-container button {
+  padding: 12px 25px;
+  background-color: pink;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.name-input-container button:hover {
+  background-color: #0056b3;
+}
+
+.form-container {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-bottom: 30px;
+  width: 400px;
+  height: 350px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-container h1 {
+    font-family: Arial, sans-serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #ff69b4;
+}
+
+
+form input, form select, form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+form button {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: pink;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Journal Entries Section */
+.journal-entries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Frame Styling */
+.journal-frame {
+  width: 200px;
+  background: #fff;
+  border: 5px solid #333;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  text-align: center;
+  transform: rotate(calc(var(--angle, 0deg)));
+  animation: wiggle 3s infinite;
+}
+
+.journal-frame h4 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+}
+
+.journal-frame p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Random rotation for frames */
+.journal-frame:nth-child(odd) {
+  --angle: -2deg;
+}
+
+.journal-frame:nth-child(even) {
+  --angle: 3deg;
+}
+
+.journal-frame:hover {
+  transform: scale(1.05) rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(calc(var(--angle, 0deg)));
+  }
+  50% {
+    transform: rotate(calc(var(--angle, 0deg) + 1deg));
+  }
+}
+
+/* YouTube Player Styling */
+.youtube-player iframe {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+}
+
+/* Disco Lights */
+.disco-lights {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  animation: flash 1.5s infinite;
+}
+
+.light:nth-child(1) {
+  background-color: red;
+  animation-delay: 0s;
+}
+
+.light:nth-child(2) {
+  background-color: yellow;
+  animation-delay: 0.3s;
+}
+
+.light:nth-child(3) {
+  background-color: green;
+  animation-delay: 0.6s;
+}
+
+.light:nth-child(4) {
+  background-color: blue;
+  animation-delay: 0.9s;
+}
+
+.light:nth-child(5) {
+  background-color: purple;
+  animation-delay: 1.2s;
+}
+
+@keyframes flash {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+/* Welcome Screen Styling */
+.welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffe6ea; /* Soft pink background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease-out;
+  overflow: hidden;
+}
+
+.welcome-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Snow Animation */
+.snow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(10px);
+    opacity: 0.3;
+  }
+}
+
+/* Set different durations and delays for each snowflake */
+.snow:nth-child(1) { animation-duration: 10s; animation-delay: -2s; left: 10%; }
+.snow:nth-child(2) { animation-duration: 8s; animation-delay: -1s; left: 20%; }
+.snow:nth-child(3) { animation-duration: 12s; animation-delay: -3s; left: 30%; }
+.snow:nth-child(4) { animation-duration: 7s; animation-delay: -4s; left: 40%; }
+.snow:nth-child(5) { animation-duration: 11s; animation-delay: -5s; left: 50%; }
+.snow:nth-child(6) { animation-duration: 9s; animation-delay: -1.5s; left: 60%; }
+.snow:nth-child(7) { animation-duration: 13s; animation-delay: -2.5s; left: 70%; }
+.snow:nth-child(8) { animation-duration: 8s; animation-delay: -3.5s; left: 80%; }
+.snow:nth-child(9) { animation-duration: 10s; animation-delay: -4.5s; left: 90%; }
+.snow:nth-child(10) { animation-duration: 12s; animation-delay: -2.5s; left: 95%; }
+
+.welcome-screen h1 {
+  color: #ff69b4;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.name-input-container {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.name-input-container input {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 2px solid #ffd1dc;
+  border-radius: 4px;
+  width: 250px;
+  transition: border-color 0.3s ease;
+}
+
+.name-input-container input:focus {
+  outline: none;
+  border-color: #ff69b4;
+}
+
+.name-input-container button {
+  padding: 12px 25px;
+  background-color: #ff69b4;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.name-input-container button:hover {
+  background-color: #ff4d94;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.entry-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.entry-actions button {
+  width: 48%;
+  padding: 8px;
+  background-color: pink;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.entry-actions button:hover {
+  background-color: #ff4d94;
+}
