@@ -1,0 +1,102 @@
+//Using Youtube Search API!!
+new Vue({
+  el: '#app',
+  data: {
+    apiKey: 
+  'AIzaSyAJe4fsUFCI9CVFSYfEimCWAL3LejZIu1g',  //Pls ignore my APi key 
+    userName: '',
+    userEntered: false,
+    newSong: {
+      name: '',
+      artist: '',
+      mood: '',
+      event: '',
+    },
+    journalEntries: [],
+    editingIndex: null, // To track which entry is being edited
+  },
+  methods: {
+    enterJournal() {
+      if (this.userName.trim()) {
+        const welcomeScreen = document.querySelector('.welcome-screen');
+        welcomeScreen.classList.add('fade-out');
+        setTimeout(() => {
+          this.userEntered = true;
+          document.querySelector('.form-container h1').textContent = 
+            `${this.userName}'s Music Journal`;
+        }, 500);
+      }
+    },
+    async addSong() {
+      if (this.newSong.name && this.newSong.artist) {
+        // Check if we're editing an existing entry or adding a new one
+        if (this.editingIndex !== null) {
+          // Editing existing entry
+          const videoId = await this.fetchYouTubeVideoId(
+            this.newSong.name,
+            this.newSong.artist
+          );
+          this.journalEntries[this.editingIndex] = { 
+            ...this.newSong, 
+            videoId 
+          };
+          this.editingIndex = null; 
+        } else {
+          // Adding new entry
+          const videoId = await this.fetchYouTubeVideoId(
+            this.newSong.name,
+            this.newSong.artist
+          );
+          this.journalEntries.push({ ...this.newSong, videoId });
+        }
+        
+        this.resetForm();
+      }
+    },
+    editEntry(index) {
+      const entryToEdit = this.journalEntries[index];
+      this.newSong = { 
+        name: entryToEdit.name,
+        artist: entryToEdit.artist,
+        mood: entryToEdit.mood,
+        event: entryToEdit.event
+      };
+      this.editingIndex = index;
+    },
+    deleteEntry(index) {
+      // Remove the entry at the specified index
+      this.journalEntries.splice(index, 1);
+    },
+    resetForm() {
+      this.newSong = {
+        name: '',
+        artist: '',
+        mood: '',
+        event: '',
+      };
+      this.editingIndex = null;
+    },
+    async fetchYouTubeVideoId(songName, artist) {
+      const query = `${songName} ${artist}`;
+      const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+        query
+      )}&key=${this.apiKey}&maxResults=1&type=video`;
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data.items && data.items.length > 0) {
+          return data.items[0].id.videoId; 
+        }
+        return null; 
+      } catch (error) {
+        console.error('Error fetching YouTube video:', error);
+        return null;
+      }
+    },
+  },
+  computed: {
+    submitButtonText() {
+      return this.editingIndex !== null ? 'Update Song' : 'Add Song';
+    }
+  }
+});
